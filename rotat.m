@@ -1,4 +1,4 @@
-tfunction f=rotat(x)
+function f=rotat(x)
 
 syms a b c;
 
