@@ -62,5 +62,5 @@ tr= ed(:,3);
 tr=tr';
 oup=fopen(sprintf('%s.trans',fn),'w');
 fprintf(oup,'%f ',tr(1,:));
-fclose(oup)
+fclose(oup);
 end

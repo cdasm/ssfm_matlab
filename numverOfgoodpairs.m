@@ -1,10 +1,11 @@
-function num=numverOfgoodpairs(pairs,v)
+function num=numverOfgoodpairs(p1,p2,v)
 num=0;
 
-siz=size(pairs);
+
 nv=norm(v);
-for i=1:siz(1)
-    if(norm( pairs(i,1:3)-(pairs(i,4:6)+v) )<nv)
+
+for i=1:length(p1)
+    if(norm( p1(i,:)-(p2(i,:)+v) )<nv)
         num=num+1;
     end
 end
