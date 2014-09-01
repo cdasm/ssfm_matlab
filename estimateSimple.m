@@ -19,9 +19,8 @@ end
 matr=zeros(number,9);
 for i=1:number
     skpt1(i,:)=im2Serph(kpt1(matches(i,1)+1,:),[512,256]);  
-    if ~isempty(varargin)
-        skpt1(i,:)=f(skpt1(i,:));
-    end
+    skpt1(i,:)=f(skpt1(i,:));
+
     skpt2(i,:)=im2Serph(kpt2(matches(i,2)+1,:),[512,256]);   
     matr(i,:)=reshape(skpt1(i,:)'*skpt2(i,:),[1,9]);
 end
@@ -40,7 +39,7 @@ t=zeros(3,3);
 for i=1:3
     [es,ev,ed]=svd(e{i});
     t(i,:)=ed(:,3)';
-
+    
     if(numverOfgoodpairs(skpt1,skpt2,t(i,:))<numverOfgoodpairs(skpt1,skpt2,t(i,:)*-1))
         t(i,:)=t(i,:)*-1;
     end
