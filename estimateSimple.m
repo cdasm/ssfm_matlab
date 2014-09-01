@@ -1,4 +1,4 @@
-function [transition,rotation]=estimateSimple(fn,varargin)
+function [transition,rotation,pts,indd]=estimateSimple(fn,varargin)
 %from a pair of image features find the transition and rotation in a simple
 %manner
 imgs=readLst(fn);
@@ -17,6 +17,8 @@ if ~isempty(varargin)
     f=rotateF(varargin{1},varargin{2},varargin{3});
 end
 matr=zeros(number,9);
+
+
 for i=1:number
     skpt1(i,:)=im2Serph(kpt1(matches(i,1)+1,:),[512,256]);  
     skpt1(i,:)=f(skpt1(i,:));
@@ -49,13 +51,13 @@ end
 
 r=zeros(3,3);
 for i=1:3
-    tt=t(i,:)
-    r(i,:)=minRotation(tt,skpt1,skpt2)
+    tt=t(i,:);
+    r(i,:)=aminRotation(tt,skpt1,skpt2);
 end
 g=zeros(3,1);
 
 for i=1:3
-    frot=rotateF(r(i,1),r(i,2),r(i,3))
+    frot=rotateF(r(i,1),r(i,2),r(i,3));
     g(i)=numverOfgoodpairs(skpt1,frot(skpt2),t(i,:));
 end
 mi=3;
@@ -80,5 +82,18 @@ fclose(oup);
 
 transition=t(mi,:);
 rotation=r(mi,:);
+
+rf=rotateF(rotation(1),rotation(2),rotation(3));
+tpts=zeros(length(skpt1),3);
+tdis=zeros(length(skpt1),1);
+for i=1:length(skpt1)
+    tp=rf(skpt2(i,:));
+    [tdis(i),tpts(i,:)]=minDisBtnTwoLines(0,0,0,skpt1(i,1),skpt1(i,2),skpt1(i,3),transition(1),transition(2),transition(3),tp(1),tp(2),tp(3));
+    
+end
+
+indx= tdis<norm(transition)/10;
+pts=tpts(indx,:);
+indd=matches(indx,2);
 
 end

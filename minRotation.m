@@ -18,3 +18,5 @@ r=matlabFunction(func);
 
 f=@(x)r(x(1),x(2),x(3));
 re=fminsearch(f,[0,0,0],optimset('GradObj','on'));
+
+end
