@@ -11,7 +11,7 @@ trans=repmat([d,e,f],[n,1]);
 pts=pts-trans;
 nspts=(ro*spts')';
 
-func=sum( acos(sum(pts.*nspts,2)./sqrt( sum(pts.*pts,2) )./sqrt( sum(nspts.*nspts,2) )).^2);
+func=sum( acos(dot(pts,nspts,2)./sqrt( sum(pts.*pts,2) )./sqrt( sum(nspts.*nspts,2) )).^2);
 
 r=matlabFunction(func);
 fme=@(x)r(x(1),x(2),x(3),x(4),x(5),x(6));

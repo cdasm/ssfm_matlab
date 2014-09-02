@@ -46,7 +46,7 @@ allrotations(1,:)=ro;
    
     skpt=skpt2(tind,:);
     gpts=pts(aind,:);
-    roatr=transitionAndRotation(gpts,skpt);
+    roatr=atransitionAndRotation(gpts,skpt);
     
     alltransitions(i,:)=roatr(1,4:6);
     allrotations(i,:)=roatr(1,1:3);
