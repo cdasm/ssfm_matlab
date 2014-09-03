@@ -1,6 +1,7 @@
 function pt=bestPoint(opt,trans,rots,spts)
 
-n=length(trans);
+siz=size(trans);
+n=siz(1);
 
 nspts=spts;
 for i=1:n
