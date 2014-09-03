@@ -4,7 +4,7 @@ fnms=readLst(fn);
 
 tr=zeros(1,3);
 ro=zeros(1,3);
-for i=1:length(fnms)
+for i=1:mylength(fnms)
     if i==1
         [tr,ro,pts,ind]=estimateSimple(fnms{i});
     else

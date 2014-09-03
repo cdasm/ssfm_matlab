@@ -13,7 +13,7 @@ options.MaxFunEvals = 20000000;
 options.MaxIter= 20000000;
 
 
-n=length(pts);
+n=mylength(pts);
 f=@(x)sum( acos(dot((pts-repmat([x(4),x(5),x(6)],[n,1])),(rotateM(x(1),x(2),x(3))*spts')',2)./sqrt( sum((pts-repmat([x(4),x(5),x(6)],[n,1])).*(pts-repmat([x(4),x(5),x(6)],[n,1])),2) )./sqrt( sum(spts.*spts,2) )).^2);
 
 re=fminsearch(f,[0,0,0,0,0,0],options);

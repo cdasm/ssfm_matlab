@@ -1,7 +1,7 @@
 function [transition,rotation]=TARfromTPntSet(skpt1,skpt2) 
 
 
-number=length(skpt1);
+number=mylength(skpt1);
 matr=zeros(number,9);
 
 for i=1:number 

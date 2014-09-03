@@ -84,9 +84,9 @@ transition=t(mi,:);
 rotation=r(mi,:);
 
 rf=rotateF(rotation(1),rotation(2),rotation(3));
-tpts=zeros(length(skpt1),3);
-tdis=zeros(length(skpt1),1);
-for i=1:length(skpt1)
+tpts=zeros(mylength(skpt1),3);
+tdis=zeros(mylength(skpt1),1);
+for i=1:mylength(skpt1)
     tp=rf(skpt2(i,:));
     [tdis(i),tpts(i,:)]=minDisBtnTwoLines(0,0,0,skpt1(i,1),skpt1(i,2),skpt1(i,3),transition(1),transition(2),transition(3),tp(1),tp(2),tp(3));
     

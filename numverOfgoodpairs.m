@@ -4,7 +4,7 @@ num=0;
 
 nv=norm(v);
 
-for i=1:length(p1)
+for i=1:mylength(p1)
     if(norm( p1(i,:)-(p2(i,:)+v) )<nv)
         num=num+1;
     end

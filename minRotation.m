@@ -7,7 +7,7 @@ rm=[  cos(b)*cos(c),  -cos(b)*sin(c),  sin(b);  cos(a)*sin(c) + cos(c)*sin(a)*si
 
 func=0;
 
-for i=1:length(pt1)
+for i=1:mylength(pt1)
     disp(i);
     x=(rm*pt2(i,:)')';
     [a1,a2]=minDisBtnTwoLines(0,0,0,pt1(i,1),pt1(i,2),pt1(i,3),t(1),t(2),t(3),x(1),x(2),x(3));

@@ -6,7 +6,7 @@ syms a b c real;
 rm=rotateM(a,b,c);
 coeff=zeros(1,81);
 
-for i=1:length(pt1)
+for i=1:mylength(pt1)
     
     x=cross(pt1(i,:),t);
     x=x/norm(x);

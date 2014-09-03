@@ -19,7 +19,7 @@ forind=1:npts;
 
 for i=1:nframes
     tmp=load(fnms{i});
-    ind=tmp(:,1);    kpt=tmp(:,2:3);      n=length(kpt);
+    ind=tmp(:,1);    kpt=tmp(:,2:3);      n=mylength(kpt);
     skptss{i}=zeros(n,3);
     for j=1:n
         skptss{i}(j,:)=im2Serph(kpt(j,:),[512,256]);
@@ -59,16 +59,16 @@ for i=2:nframes
 
     matche=matchBetweenTwoV(ind2,gind);
     if ~isempty(matche)
-        s=bestScale(pts(gind(matche(:,2)),:)-repmat(transitions(i-1,:),[length(matche),1]),tran,rot,skpt2(matche(:,1),:))
+        s=bestScale(pts(gind(matche(:,2)),:)-repmat(transitions(i-1,:),[mylength(matche),1]),tran,rot,skpt2(matche(:,1),:))
         tran=tran*s;
     end
     transitions(i,:)=tran+transitions(i-1,:);
     rotations(i,:)=rot;
     
-    tpts=zeros(length(matches),3);
-    tdis=zeros(length(matches),1);
+    tpts=zeros(mylength(matches),3);
+    tdis=zeros(mylength(matches),1);
     rmt=rotateMM(rot);
-    for j=1:length(matches)
+    for j=1:mylength(matches)
         
         i1=matches(j,1);
         i2=matches(j,2);
@@ -82,7 +82,7 @@ for i=2:nframes
     ttind=find(goodmark(tind)==0);
    
   
-    pts(tind(ttind),:)=tpts(prind(ttind),:)+repmat(transitions(i-1,:),[length(ttind),1]);
+    pts(tind(ttind),:)=tpts(prind(ttind),:)+repmat(transitions(i-1,:),[mylength(ttind),1]);
     goodmark(tind(ttind))=1;
     
 end

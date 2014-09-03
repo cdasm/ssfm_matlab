@@ -13,7 +13,7 @@ allrotations(1,:)=ro;
     matches=load(strcat(fn,'.mtch'));
     kpt1=load(strcat(imgs{1},'.orb'));
     kpt2=load(strcat(imgs{2},'.orb'));
-    number=length(matches);
+    number=mylength(matches);
     
     skpt1=zeros(number,3);
     skpt2=zeros(number,3);
@@ -54,9 +54,9 @@ allrotations(1,:)=ro;
     transition=roatr(1,4:6);
     rf1=rotateF(ro(1),ro(2),ro(3));
     rf2=rotateF(roatr(1),roatr(2),roatr(3));
-    tpts=zeros(length(skpt1),3);
-    tdis=zeros(length(skpt1),1);
-    for j=1:length(skpt1)
+    tpts=zeros(mylength(skpt1),3);
+    tdis=zeros(mylength(skpt1),1);
+    for j=1:mylength(skpt1)
         rp=rf1(skpt1(j,:));
         tp=rf2(skpt2(j,:));
         [tdis(j),tpts(j,:)]=minDisBtnTwoLines(tr(1),tr(2),tr(3),rp(1),rp(2),rp(3),transition(1),transition(2),transition(3),tp(1),tp(2),tp(3));
@@ -65,7 +65,7 @@ allrotations(1,:)=ro;
 
     indx= tdis<norm(transition-tr)/10;
     pts=tpts(indx,:);
-    length(pts)
+    mylength(pts)
     ind=matches(indx,2);
     
     end  

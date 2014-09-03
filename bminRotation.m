@@ -6,7 +6,7 @@ syms a b c real;
 
 
 
-trans=repmat(t,[length(pt1),1]);
+trans=repmat(t,[mylength(pt1),1]);
 
 todot=cross(pt1,trans,2)./repmat(sqrt(sum(cross(pt1,trans,2).*cross(pt1,trans,2),2)) ,[1,3]);
 

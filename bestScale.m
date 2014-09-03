@@ -3,7 +3,7 @@ function sc=bestScale(pts,tran,rot,spts)
 spts=spts./repmat(sqrt(sum(spts.*spts ,2)),[1,3]);
 nspts=(rotateMM(rot)*spts')';
 
-n=length(pts);
+n=mylength(pts);
 
 %pts-repmat(tran*x,[n,1])
 f=@(x) sum(acos(dot( pts-repmat(tran*x,[n,1]) ,nspts,2)./sqrt( sum((pts-repmat(tran*x,[n,1])).*(pts-repmat(tran*x,[n,1])),2) )  ).^2);
