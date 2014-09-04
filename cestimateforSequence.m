@@ -48,6 +48,8 @@ for i=2:nframes
     skpt2=skptss{i};
     ind2=indss{i};
     matches=matchBetweenTwoV(ind1,ind2);
+    
+    [tran,rot,gscore]=aTARfromTPntSet(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
 end
 
 

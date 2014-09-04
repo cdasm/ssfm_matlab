@@ -1,4 +1,4 @@
-function pt=bestPoint(opt,trans,rots,spts)
+function pt=abestPoint(opt,trans,rots,spts)
 
 siz=size(trans);
 n=siz(1);
@@ -13,7 +13,8 @@ options=optimset('GradObj','on');
 %set(options,'Maxiter',2000000);
 options.MaxFunEvals = 20000000;
 options.MaxIter= 20000000;
-
-f=@(x)sum(acos( dot(repmat([x(1),x(2),x(3)],[n,1])-trans, nspts,2)./ sqrt( sum((repmat([x(1),x(2),x(3)],[n,1])-trans).*(repmat([x(1),x(2),x(3)],[n,1])-trans),2))).^2);
+%repmat([x(1),x(2),x(3)],[n,1])-trans
+%nspts
+f=@(x)sum(sum( cross(repmat([x(1),x(2),x(3)],[n,1])-trans,nspts,2 ).*cross(repmat([x(1),x(2),x(3)],[n,1])-trans,nspts,2 ) ));
 
 pt=fminsearch(f,opt,options);
