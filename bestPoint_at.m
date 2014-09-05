@@ -1,4 +1,4 @@
-function pt=atbestPoint(opt,trans,rots,spts)
+function pt=bestPoint_at(opt,trans,rots,spts)
 
 siz=size(trans);
 n=siz(1);

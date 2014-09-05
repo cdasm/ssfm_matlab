@@ -1,4 +1,4 @@
-function re = aminRotation( t,pt1,pt2 )
+function re = minRotation_a( t,pt1,pt2 )
 %A faster way to estimate rotation
 
 syms a b c real;

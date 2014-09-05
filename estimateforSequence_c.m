@@ -1,4 +1,4 @@
-function [transitions,rotations,pts]=cestimateforSequence(seq,goldpts,pntpos)
+function [transitions,rotations,pts]=estimateforSequence_c(seq,goldpts,pntpos)
 
 fnms=readLst(seq);
 

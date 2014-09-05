@@ -1,4 +1,4 @@
-function f=areadLst(fl)
+function f=readLst_a(fl)
 %this will return a  list of strings which is read from a file
 inp=fopen(fl);
 num= str2num(fgetl(inp));

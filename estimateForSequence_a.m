@@ -1,4 +1,4 @@
-function [allpts,alltransitions,allrotations]=aestimateForSequence(fns)
+function [allpts,alltransitions,allrotations]=estimateForSequence_a(fns)
 fnms=readLst(fns);
 
 alltransitions=zeros(length(fnms),3);

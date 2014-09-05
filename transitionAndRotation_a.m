@@ -1,4 +1,4 @@
-function re=atransitionAndRotation(pts, spts)
+function re=transitionAndRotation_a(pts, spts)
 %input are pysical points and the shperical image
 
 %syms a b c d e f real;
