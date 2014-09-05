@@ -1,4 +1,4 @@
-function sc=bestScale(pts,tran,rot,spts)
+function sc=bestScale_a(pts,tran,rot,spts)
 
 spts=spts./repmat(sqrt(sum(spts.*spts ,2)),[1,3]);
 nspts=(rotateMM(rot)*spts')';
@@ -14,8 +14,13 @@ options=optimset('GradObj','on');
 options.MaxFunEvals = 20000000;
 options.MaxIter= 20000000;
 
-f=@(x) sum(acos(dot( pts-repmat(tran*x,[n,1]) ,nspts,2)./sqrt( sum((pts-repmat(tran*x,[n,1])).*(pts-repmat(tran*x,[n,1])),2) )  ).^2);
+%dis=sum(cross([x1,x2,x3]-[p1,p2,p3],[u1,u2,u3]).^2)/([u1,u2,u3]*[u1,u2,u3].');
+
+%sum(sum(cross( pts-x*tran,nspts,2).^2),2 )./sum(nspts.^2 ,2));
+
+f=@(x)sum(sum(cross( pts-x* repmat(tran,[n,1]),nspts,2).^2,2)./sum(nspts.^2 ,2));
 
 
-sc=fminsearch(f,[0],options);
+
+sc=fminsearch(f,[1],options);
 end

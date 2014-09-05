@@ -8,7 +8,7 @@ function dis=disPntLine_b(x,p,u)
 %f=allcombination(ta{:});
 
 ta=num2cell([x,p,u]);
-dis=adisPntLine(ta{:});
+dis=disPntLine_a(ta{:});
 
 
 end
