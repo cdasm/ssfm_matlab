@@ -1,0 +1,7 @@
+Tested a few functions
+
+these include abestpoint atbestpoint cbestpoint
+
+their results are consistent, and especially consistent with mindisbtwTwolines.
+
+and cbestpoint is fastest.
