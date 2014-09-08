@@ -2,8 +2,8 @@ function [transitions,rotations,pts]=estimateforSequence_c(seq,goldpts,pntpos)
 
 fnms=readLst(seq);
 
-gptcorres=areadLst(goldpts);
-pntposs=areadLst(pntpos);
+gptcorres=readLst_a(goldpts);
+pntposs=readLst_a(pntpos);
 
 nframes=length(fnms);
 npts=length(gptcorres);

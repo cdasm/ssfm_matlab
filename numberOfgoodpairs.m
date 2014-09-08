@@ -1,4 +1,4 @@
-function num=numverOfgoodpairs(p1,p2,v)
+function num=numberOfgoodpairs(p1,p2,v)
 num=0;
 
 

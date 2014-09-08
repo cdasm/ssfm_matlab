@@ -1,4 +1,4 @@
-function [t,r,g]=aTARfromTPntSet(skpt1,skpt2) 
+function [t,r,g]=TARfromTPntSet_a(skpt1,skpt2) 
 
 
 number=mylength(skpt1);
@@ -27,7 +27,7 @@ g=zeros(6,2);
 for i=1:6
     [es,ev,ed]=svd(e{i});
     t(i,:)=ed(:,3)';  
-    g(i,1)=numverOfgoodpairs(skpt1,skpt2,t(i,:));
+    g(i,1)=numberOfgoodpairs(skpt1,skpt2,t(i,:));
    % g(i)=numverOfgoodpairs(skpt1,skpt2,t(i,:));
 end
 
@@ -35,11 +35,11 @@ end
 r=zeros(6,3);
 for i=1:6
     tt=t(i,:);
-    r(i,:)=aminRotation(tt,skpt1,skpt2);
+    r(i,:)=minRotation_a(tt,skpt1,skpt2);
 end
 
 
 for i=1:6
     frot=rotateF(r(i,1),r(i,2),r(i,3));
-    g(i,2)=numverOfgoodpairs(skpt1,frot(skpt2),t(i,:));
+    g(i,2)=numberOfgoodpairs(skpt1,frot(skpt2),t(i,:));
 end

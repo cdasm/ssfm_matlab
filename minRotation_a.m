@@ -15,7 +15,7 @@ for i=1:mylength(pt1)
     coeff=coeff+touseaallcombin(x,y);
 end
 
-func(a,b,c)=aallcombintion(rm)*coeff';
+func(a,b,c)=allcombintion_a(rm)*coeff';
 
 r=matlabFunction(func);
 f=@(x)r(x(1),x(2),x(3));
