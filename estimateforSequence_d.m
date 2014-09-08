@@ -1,4 +1,4 @@
-function [transitions,rotations,pts]=estimateforSequence_c(seq,goldpts,pntpos)
+function [transitions,rotations,pts]=estimateforSequence_d(seq,goldpts,pntpos)
 
 fnms=readLst(seq);
 
@@ -50,28 +50,34 @@ for i=2:nframes
     ind2=indss{i};
     matches=matchBetweenTwoV(ind1,ind2);
     
-    [tran,rot,gscore]=TARfromTPntSet_a(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
+    [tran,rot,gscore]=TARfromTPntSet_b(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
     
-    tran1=tran(1,:);
-    rot1=rot(1,:);
+    
+    mi=find(gscore==max(gscore));
+    
+    tran1=tran(mi,:);
+    rot1=rot(mi,:);
+    
+    
+    dpts=zeros(mylength(matches),3);
+    for j=1:mylength(matches)
+       dpts(j,:)=bestPoint_at([0,0,0;tran1],[0,0,0;rot1],[skpt1(matches(j,1),:);skpt2(matches(j,2),:)]);
+    end
     gind=find(goodmark>0);
-
-    matche=matchBetweenTwoV(ind2,gind);
-    
+    matche=matchBetweenTwoV(ind2(matches(:,2)),gind);
     if(~isempty(matche))
         tmpts=pts(gind(matche(:,2)),:);
-        re=transitionAndRotation_c(tmpts ,skpt2(matche(:,1),:));
-        rot1=re(1,1:3);
-        tran1=re(1,4:6);
+           
+        re=bestScale_b(tmpts-repmat(transitions(i-1,:),[mylength(tmpts),1]),dpts(matche(:,1),:))
+        %=transitionAndRotation_c(tmpts ,skpt2(matche(:,1),:));
+        
+        tran1=tran1*re;
     end
     
-    if i==2
-        transitions(i,:)=tran(2,:)+transitions(i-1,:);
-        rotations(i,:)=rot(2,:);
-    else
-        transitions(i,:)=tran1;
-        rotations(i,:)=rot1;
-    end
+
+    transitions(i,:)=tran1+transitions(i-1,:);
+    rotations(i,:)=rot1;
+   
     
     for j=1:mylength(matches)
         ptind=ind1(matches(j,1));
@@ -81,7 +87,7 @@ for i=2:nframes
         tmspts=iptss{ptind}(inds,:);
         tmtran=transitions(frms,:);
         tmro=rotations(frms,:);
-        pts(ptind,:)=bestPoint_c(tmtran,tmro,tmspts);
+        pts(ptind,:)=bestPoint_at(tmtran,tmro,tmspts);
         goodmark(ptind,1)=1;
     end
 end

@@ -1,4 +1,4 @@
-function pt=bestPoint_at(opt,trans,rots,spts)
+function pt=bestPoint_at(trans,rots,spts)
 
 siz=size(trans);
 n=siz(1);
@@ -21,4 +21,4 @@ options.MaxIter= 20000000;
 f=@(x)sum( sum((cross( (repmat(x,[n,1])-trans),nspts,2)).^2,2)./sum(nspts.^2,2));
 
 
-pt=fminsearch(f,opt,options);
+pt=fminsearch(f,[1,1,1],options);
