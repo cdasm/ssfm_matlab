@@ -38,6 +38,7 @@ for i=1:npts
     end
 end
 
+ 
 
 for i=2:nframes
  
@@ -50,6 +51,39 @@ for i=2:nframes
     matches=matchBetweenTwoV(ind1,ind2);
     
     [tran,rot,gscore]=TARfromTPntSet_a(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
+    
+    tran1=tran(1,:);
+    rot1=rot(1,:);
+    gind=find(goodmark>0);
+
+    matche=matchBetweenTwoV(ind2,gind);
+    
+    if(~isempty(tind))
+        tmpts=pts(matche(:,2),:);
+        re=transitionAndRotation_a(tmpts ,skpt2(matche(:,1),:));
+        rot1=re(1,1:3);
+        tran1=re(1,4:6);
+    end
+    
+    if i==2
+        transitions(i,:)=tran(2,:)+transitions(i-1,:);
+        rotations(i,:)=rot(2,:);
+    else
+        transitions(i,:)=tran1;
+        rotations(i,:)=rot1;
+    end
+    
+    for j=1:mylength(matches)
+        ptind=ind1(matches(j,1));
+        frmind=i;
+        inds=find(gptcorres{ptind}<=frmind);
+        frms=gptcorres{ptind}(inds);
+        tmspts=iptss{ptind}(inds,:);
+        tmtran=transitions(frms,:);
+        tmro=rotations(frms,:);
+        pts(ptind,:)=bestPoint_c(tmtran,tmro,tmspts);
+        goodmark(ptind,1)=1;
+    end
 end
 
 
