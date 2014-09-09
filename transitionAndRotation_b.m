@@ -12,12 +12,13 @@ options=optimset('GradObj','on');
 options.MaxFunEvals = 20000000;
 options.MaxIter= 20000000;
 
+spts=spts./repmat(sqrt(sum(spts.^2,2)),[1,3]);
 
-%n=length(pts);
+n=mylength(pts);
 
 
-f=@(x,pt,spt) acos(dot(pt-[x(4),x(5),x(6)], (rotateM(x(1),x(2),x(3))*spt')')/norm(pt-[x(4),x(5),x(6)])/norm(spt));
+f=@(x) acos(  dot( pts- repmat( [x(4),x(5),x(6)],[n,1]), (rotateM(x(1),x(2),x(3))*spts')',2) ./sqrt(sum( (pts- repmat( [x(4),x(5),x(6)],[n,1])).^2 ,2)  )  );
 
-[re,resnorm]=lsqnonlin(f,[0,0,0,0,0,0],[],[],[],pts,spts);
+[re,resnorm]=lsqnonlin(f,[0,0,0,0,0,0],[],[],getoptimzeoption);
 
 end

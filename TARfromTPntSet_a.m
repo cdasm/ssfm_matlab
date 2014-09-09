@@ -37,7 +37,7 @@ end
 r=zeros(6,3);
 for i=1:6
     tt=t(i,:);
-    r(i,:)=minRotation_c(tt,skpt1,skpt2);
+    r(i,:)=minRotation_e(tt,skpt1,skpt2);
 end
 
 
