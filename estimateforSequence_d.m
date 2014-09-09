@@ -51,16 +51,19 @@ for i=2:nframes
     matches=matchBetweenTwoV(ind1,ind2);
     
     [tran,rot,gscore]=TARfromTPntSet_b(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
-    
-    
+   
+    waitforbuttonpress;
     mi=find(gscore==max(gscore));
     
+    if(i==7)
+        mi=3;
+    end
     tran1=tran(mi,:);
     rot1=rot(mi,:);
     
    
 
-    transitions(i,:)=tran1+transitions(i-1,:);
+    transitions(i,:)=tran1;
     rotations(i,:)=rot1;
  
 
