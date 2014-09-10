@@ -52,7 +52,10 @@ for i=2:nframes
     
     [tran,rot,gscore]=TARfromTPntSet_b(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
    
-    waitforbuttonpress;
+    %tran
+    %rot 
+    %gscore
+    %waitforbuttonpress;
     mi=find(gscore==max(gscore));
     
     if(i==7)
@@ -63,7 +66,7 @@ for i=2:nframes
     
    
 
-    transitions(i,:)=tran1;
+    transitions(i,:)=transitions(i-1,:)+tran1;
     rotations(i,:)=rot1;
  
 
