@@ -13,10 +13,26 @@ syms c
 
 
 for i=1:100
-   [sp1,sp2,t,r]=synthesisData(300);
+   [p,sp1,sp2,t,r]=synthesisData(300);
     [a,b,c]=TARfromTPntSet_a(sp1,sp2);
     a./repmat(t,[6,1])
     b./repmat(r,[6,1])
+    waitforbuttonpress;
+end
+ 
+
+as=zeros(100,3);
+bs=zeros(100,3);
+for i=1:100
+    i
+   [p,sp1,sp2,t,r]=synthesisData(300);
+    re=transitionAndRotation_b(p,sp2);
+    b=re(1,1:3);
+    a=re(1,4:6);
+    a./t
+    b./r
+   % as(i,:)=;
+   % bs(i,:)=;
     waitforbuttonpress;
 end
  

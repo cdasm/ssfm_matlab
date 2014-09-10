@@ -1,10 +1,10 @@
-function [sp1,sp2,t,r] =synthesisData(n)
-p=rand(n,3)*10+10;
-t=rand(1,3)*2;
+function [pp,sp1,sp2,t,r] =synthesisData(n)
+pp=rand(n,3)*10+10;
+t=rand(1,3)*5;
 
-sp1=p./repmat(sqrt(sum(p.^2,2)),[1,3]);
+sp1=pp./repmat(sqrt(sum(pp.^2,2)),[1,3]);
 
-p=p-repmat(t,[n,1]);
+p=pp-repmat(t,[n,1]);
 
 sp2=p./repmat(sqrt(sum(p.^2,2)),[1,3]);
 
