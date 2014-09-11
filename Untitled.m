@@ -27,6 +27,7 @@ for i=1:100
     i
    [p,sp1,sp2,t,r]=synthesisData(300);
     re=transitionAndRotation_b(p,sp2);
+    re=real(re);
     b=re(1,1:3);
     a=re(1,4:6);
     a./t

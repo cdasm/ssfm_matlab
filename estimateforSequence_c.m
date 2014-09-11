@@ -60,7 +60,7 @@ for i=2:nframes
     
     if(~isempty(matche))
         tmpts=pts(gind(matche(:,2)),:);
-        re=transitionAndRotation_c(tmpts ,skpt2(matche(:,1),:));
+        re=transitionAndRotation_b(tmpts ,skpt2(matche(:,1),:));
         rot1=re(1,1:3);
         tran1=re(1,4:6);
     end
