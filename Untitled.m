@@ -14,7 +14,7 @@ syms c
 
 for i=1:100
    [p,sp1,sp2,t,r]=synthesisData(300);
-    [a,b,c]=TARfromTPntSet_a(sp1,sp2);
+    [a,b,c]=TARfromTPntSet_autest(sp1,sp2);
     a./repmat(t,[6,1])
     b./repmat(r,[6,1])
     waitforbuttonpress;
@@ -36,4 +36,63 @@ for i=1:100
    % bs(i,:)=;
     waitforbuttonpress;
 end
+
+
+
+
+agood=0;
+ good=0;
+ record=zeros(100,2);
+for i=1:100
+   [p,sp1,sp2,t,r]=synthesisData(300);
+    [a,b,c]=TARfromTPntSet_autest(sp1,sp2);
+    ta=a./repmat(t,[6,1]);
+    tb=b./repmat(r,[6,1]);
+    
+    if(c(3,2)>c(6,2))
+        mi=3;
+    else
+        mi=6;
+    end
+    
+    tran=a(mi,:);
+    rot=b(mi,:);
+    
+  % record(i,1)=sum(abs( b(mi,:) ))-3;
+    if( sum(abs( b(mi,:) ))-3 < 1e-4 )
+        agood=agood+1;
+        pts=zeros(mylength(p),3);
+        
+        for j=1:mylength(p)
+            pts(j,:)=bestPoint_c([0,0,0;tran],[0,0,0;rot],[sp1(j,:);sp2(j,:)]);
+        end
+        n=mylength(p);
+        rati=pts./p;
+        %record(i,2)=;
+        sum(rati-repmat((tran./t),[n,1]))
+        if(sum(sum(rati-repmat((tran./t),[n,1])))<1e-3)
+            good=good+1;
+        end
+        
+    end
+     
+   %waitforbuttonpress;
+end
+agood
+good
+
+
+good=0;
+
+for i=1:100
+   [p,sp1,sp2,t,r]=synthesisData(300);
+    [a,b]=bestTaR_a (sp1,sp2);
+    a./t
+    if abs(sum(abs(b./r))-3)<1e-3
+        good=good+1;
+    end
+    %waitforbuttonpress;
+end
+good
+
  

@@ -1,5 +1,5 @@
 function pt=bestPoint(opt,trans,rots,spts)
-
+%this function doest not work at all
 siz=size(trans);
 n=siz(1);
 
