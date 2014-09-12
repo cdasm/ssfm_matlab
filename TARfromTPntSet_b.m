@@ -43,3 +43,5 @@ for i=1:4
     frot=rotateF(r(i,1),r(i,2),r(i,3));
     g(i,1)=numberOfgoodpairs(skpt1,frot(skpt2),t(i,:));
 end
+
+

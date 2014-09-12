@@ -1,4 +1,4 @@
-function re=forcbestPoint(p,u)
+function re=forbestPoint_c(p,u)
 
 %re=zeros(3,4);
 

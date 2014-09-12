@@ -22,3 +22,9 @@ dot(p-q,cross(u,v))^2/sum(cross(u,v).^2)/2
 dot(v,v')*dot(u,u')*dot(w,w')*(dot(p-q,cross(u,v))^2+dot(q-r,cross(v,w))^2+dot(r-p,cross(v,w))^2)/(sum(cross(u,v).^2)+sum(cross(v,w).^2)+sum(cross(w,u).^2))/(dot(u,u')+dot(v,v')+dot(w,w'))
 
 %and let's verify this
+%wrong guess
+
+%another guess
+
+dot(v,v')*dot(u,u')*dot(w,w')*dot(p-q,cross(u,v))^2*dot(q-r,cross(v,w))^2*dot(r-p,cross(v,w))^2/sum(cross(u,v).^2)/sum(cross(v,w).^2)/sum(cross(w,u).^2)/(dot(u,u')+dot(v,v')+dot(w,w'))
+%wrong

@@ -8,7 +8,8 @@ pntposs=readLst_a(pntpos);
 nframes=length(fnms);
 npts=length(gptcorres);
 
-rotations=zeros(nframes,3);
+rotations=cell(nframes,1);
+rotations{1}=eye(3);
 transitions=zeros(nframes,3);
 pts=zeros(npts,3);
 goodmark=zeros(npts,1);
@@ -41,33 +42,28 @@ end
  
 
 for i=2:nframes
-    i
+    
     skpt1=skptss{i-1};
     ind1=indss{i-1};
-    skpt1=(rotateMM(rotations(i-1,:))*skpt1')';
+    skpt1=(rotations{i-1}*skpt1')';
     
     skpt2=skptss{i};
     ind2=indss{i};
     matches=matchBetweenTwoV(ind1,ind2);
     
-    [tran,rot,gscore]=TARfromTPntSet_b(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
+    [tran,rot,gscore]=TARfromTPntSet_c(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
    
-    %tran
-    %rot 
-    %gscore
-    %waitforbuttonpress;
+
     mi=find(gscore==max(gscore));
     
-    if(i==7)
-        mi=3;
-    end
-    tran1=tran(mi,:);
-    rot1=rot(mi,:);
+ 
+    tran1=tran(mi(1),:);
+    rot1=rot{mi(1)};
     
    
 
     transitions(i,:)=transitions(i-1,:)+tran1;
-    rotations(i,:)=rot1;
+    rotations{i}=rot1;
  
 
 end
