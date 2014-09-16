@@ -42,7 +42,7 @@ end
  
 
 for i=2:nframes
-    
+    i
     skpt1=skptss{i-1};
     ind1=indss{i-1};
     skpt1=(rotations{i-1}*skpt1')';
@@ -51,19 +51,15 @@ for i=2:nframes
     ind2=indss{i};
     matches=matchBetweenTwoV(ind1,ind2);
     
-    [tran,rot,gscore]=TARfromTPntSet_c(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
+    [tran,rot]=TARfromTPntSet_ransac(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
    
 
-    mi=find(gscore==max(gscore));
-    
- 
-    tran1=tran(mi(1),:);
-    rot1=rot{mi(1)};
+   
     
    
 
-    transitions(i,:)=transitions(i-1,:)+tran1;
-    rotations{i}=rot1;
+    transitions(i,:)=transitions(i-1,:)+tran;
+    rotations{i}=rot;
  
 
 end

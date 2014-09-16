@@ -19,7 +19,12 @@ Z = [0 1 0; -1 0 0; 0 0 0];
 Tx = U * Z * U';
 
 R1 = U * W * V';
+if det(R1)<0
+    R1=-1*R1;
+end
 
 R2 = U * W' * V';
-
+if det(R2)<0
+    R2=-1*R2;
+end
 

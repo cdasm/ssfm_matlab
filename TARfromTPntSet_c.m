@@ -7,6 +7,7 @@ for i=1:number
     matr(i,:)=reshape(skpt1(i,:)'*skpt2(i,:),[1,9]);
 end
 
+%matr=singular_value_rpca(matr,0.11);
 [s,v,d]=svd(matr);
 
 e=cell(2,1);
@@ -25,15 +26,22 @@ r=cell(8,1);
 
 for i=1:2
    [a,b,c]=torr_EtoRt(e{i});
-   t(i*4-3,:)=fromcrossmatrix(a);
+   tt=fromcrossmatrix(a);
+   t(i*4-3,:)=tt;
    r{i*4-3,:}=b;
-   t(i*4-2,:)=fromcrossmatrix(a);
+   
+   t(i*4-2,:)=tt;
    r{i*4-2,:}=c;
-   t(i*4-1,:)=-fromcrossmatrix(a);
+   
+   t(i*4-1,:)=-tt;
    r{i*4-1,:}=b;
-   t(i*4,:)=-fromcrossmatrix(a);
+   
+   t(i*4,:)=-tt;
    r{i*4,:}=c;
 end
+
+
+
 
 g=zeros(8,1);
 

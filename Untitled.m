@@ -95,4 +95,22 @@ for i=1:100
 end
 good
 
+
+for i=1:100
+    [p,sp1,sp2,t,r]=synthesisData(20);
+     [a,b,c]=TARfromTPntSet_c(sp1,sp2);
+     a./repmat(t,[8,1])
+     tr=rotateMM(r);
+     good=0;
+     for j=1:8
+        % b{j}./tr
+        if sum(sum(b{j}./tr-ones(3,3),2))<1e-3
+            good=1;
+        end
+     end
+     
+     good
+    waitforbuttonpress;
+end
+
  
