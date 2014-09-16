@@ -9,7 +9,7 @@ r=zeros(3,3);
 
 tskpt1=skpt1;
 tskpt2=skpt2;
-th=round(num*0.85);
+th=round(num*0.65);
 
 for i=1:400
 
