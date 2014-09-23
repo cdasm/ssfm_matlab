@@ -1,4 +1,4 @@
-function [t,r,g]=TARfromTPntSet_c(skpt1,skpt2) 
+function [t,r,g,ind]=TARfromTPntSet_c(skpt1,skpt2) 
 
 number=mylength(skpt1);
 matr=zeros(number,9);
@@ -45,10 +45,10 @@ end
 
 g=zeros(8,1);
 
-
+ind=cell(i,1);
 for i=1:8
     %frot=rotateF(r(i,1),r(i,2),r(i,3));
-    g(i,1)=numberOfgoodpairs(skpt1,(r{i}*skpt2')',t(i,:));
+    [g(i,1),ind{i}]=numberOfgoodpairs(skpt1,(r{i}*skpt2')',t(i,:));
 end
 
 
