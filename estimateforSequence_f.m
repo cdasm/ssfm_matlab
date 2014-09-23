@@ -67,15 +67,25 @@ for i=3:nframes
             
         end
     end
-    
-    if i==3
-        ind2=gindx(bind,2);
+    [tosee,tind]=sort(tscores);
+    tosee
+    scs=zeros(mylength(sindx),1);
+   for j=1:mylength(sindx)
+        ind2=gindx(tind(j),1);
         transitions(i-1,:)=transitions(i-2,:)+tran{1}( ind2 ,:);
         rotations{i-1}=rot{1}{ind2};
-        ind3=gindx(bind,3);
+        
+         ind3=gindx(tind(j),2);
+         ind1=gindx(tind(j),3);
+        scs(j)=bestScale_c(transitions(i-2,:),tran{3}(ind1,:),transitions(i-1,:),(rotations{i-1}* tran{2}(ind3,:)')');
+        
+       
         rotations{i}=rotations{i-1}* rot{2}{ind3};
-    else
-    end
+   end
+   scs
+   waitforbuttonpress;
+    %else
+    %end
 
    % transitions(i,:)=transitions(i-1,:)+tran1;
    % rotations{i}=rot1;
