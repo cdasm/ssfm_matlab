@@ -52,13 +52,17 @@ for i=2:nframes
     matches=matchBetweenTwoV(ind1,ind2);
     
     [tran,rot,gscore]=TARfromTPntSet_c(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
-   
-    gscore
-    mi=find(gscore==max(gscore));
-    tran1=tran(mi(1),:);
-    rot1=rot{mi(1)};
     
-   waitforbuttonpress;
+    [~,idx]=sort(gscore);
+    
+    cad1=idx(mylength(idx));
+    cad2=idx(mylength(idx)-1);
+    
+  %  if(gscore(cad1)-gscore(cad2) >10)
+ 
+        tran1=tran(cad1,:);
+        rot1=rot{cad1};
+ 
 
     transitions(i,:)=transitions(i-1,:)+tran1;
     rotations{i}=rot1;
