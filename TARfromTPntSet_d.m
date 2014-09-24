@@ -14,6 +14,7 @@ goldnum=round(num*0.85);
 for i=1:1000
     
      choice=randperm(num);
+     try
     ee=  calibrated_fivepoint (skpt1(choice(1:5),:),skpt2(choice(1:5),:));
     if size(ee,2)>0
         e=reshape(ee(:,size(ee,2)),[3,3]);
@@ -27,6 +28,8 @@ for i=1:1000
             end
         end
     end
+     catch me
+     end
     
 end
 
