@@ -62,8 +62,8 @@ function Evec = calibrated_fivepoint( Q1,Q2)
 
 
 %1 Pose linear equations for the essential matrix. 
-Q1 = Q1';
-Q2 = Q2';
+%Q1 = Q1';
+%Q2 = Q2';
 
 Q = [Q1(:,1).*Q2(:,1) , ...
      Q1(:,2).*Q2(:,1) , ...

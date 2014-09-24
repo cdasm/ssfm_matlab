@@ -32,10 +32,10 @@
 %
 %
 % Please refer to this paper if you use this code. 
-function [SOLS,EE] = fivePoint(Q1,Q2)
+function [SOLS,EE] = calibrated_fivepoint_non_gb(Q1,Q2)
 
-Q1 = Q1';
-Q2 = Q2';
+%Q1 = Q1';
+%Q2 = Q2';
 
 Q = [Q1(:,1).*Q2(:,1) , ...
      Q1(:,2).*Q2(:,1) , ...
