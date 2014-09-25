@@ -113,4 +113,17 @@ for i=1:100
     waitforbuttonpress;
 end
 
+
+
+%inference memo
+
+a=sym('a',[5,3])
+b=sym('b',[5,3])
+for i=1:5
+f{i}=a(i,:)*essentialMatrix(x,y,u,v,w)*b(i,:).'
+end
+
+
+[a1,a2,a3,a4,a5]=solve(f{1}==0,f{2}==0,f{3}==0,f{4}==0,f{5}==0,'x','y','u','v','w')
+
  
