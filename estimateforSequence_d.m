@@ -27,14 +27,14 @@ kptcolors=cell(nframes,1);
 
 for i=1:nframes
     tmp=load(fnms{i});
-    img=imread(imgnms{i});
+    %img=imread(imgnms{i});
     ind=tmp(:,1);    kpt=tmp(:,2:3);      n=mylength(kpt);
     skptss{i}=zeros(n,3);
     kptcolors{i}=zeros(n,3);
     for j=1:n
-        skptss{i}(j,:)=im2Serph(kpt(j,:),[512,256]);
+        skptss{i}(j,:)=im2Serph(kpt(j,:),[8000,4000]);
         for k=1:3
-            kptcolors{i}(j,k)=img(kpt(j,2),kpt(j,1),k);
+            %kptcolors{i}(j,k)=img(kpt(j,2),kpt(j,1),k);
         end
     end
     indss{i}=ind;
