@@ -1,7 +1,6 @@
-function [transitions,rotations,pts,ptcolors]=estimateforSequence_d(seq,goldpts,pntpos)
+function [transitions,rotations,pts]=estimateforSequence_d(seq,goldpts,pntpos)
 
 fnms=readLst(seq);
-imgnms=readLst('allimg.lst');
 
 gptcorres=readLst_a(goldpts);
 pntposs=readLst_a(pntpos);
@@ -13,8 +12,6 @@ rotations=cell(nframes,1);
 rotations{1}=eye(3);
 transitions=zeros(nframes,3);
 pts=zeros(npts,3);
-
-ptcolors=zeros(npts,3);
 goodmark=zeros(npts,1);
 
 
@@ -22,20 +19,12 @@ skptss=cell(nframes,1);
 indss=cell(nframes,1);
 iptss=cell(npts,1);
 
-kptcolors=cell(nframes,1);
-
-
 for i=1:nframes
     tmp=load(fnms{i});
-    img=imread(imgnms{i});
     ind=tmp(:,1);    kpt=tmp(:,2:3);      n=mylength(kpt);
     skptss{i}=zeros(n,3);
-    kptcolors{i}=zeros(n,3);
     for j=1:n
         skptss{i}(j,:)=im2Serph(kpt(j,:),[512,256]);
-        for k=1:3
-            kptcolors{i}(j,k)=img(kpt(j,2),kpt(j,1),k);
-        end
     end
     indss{i}=ind;
 end
@@ -54,53 +43,30 @@ end
 
 for i=2:nframes
     i
-    
+    skpt1=skptss{i-1};
     ind1=indss{i-1};
+    skpt1=(rotations{i-1}*skpt1')';
     
-    
-   
+    skpt2=skptss{i};
     ind2=indss{i};
     matches=matchBetweenTwoV(ind1,ind2);
     
- 
-    skpt1=skptss{i-1}(matches(:,1),:);
-    
-    skpt1=(rotations{i-1}*skpt1')';
-    
-    skpt2=skptss{i}(matches(:,2),:);
-    
-    
-    cptcolor=kptcolors{i}(matches(:,2),:);
-    
-    [tran,rot,gscore]=TARfromTPntSet_c(skpt1,skpt2);
+    [tran,rot,gscore]=TARfromTPntSet_c(skpt1(matches(:,1),:),skpt2(matches(:,2),:));
     
     [~,idx]=sort(gscore);
     
     cad1=idx(mylength(idx));
-    
+    cad2=idx(mylength(idx)-1);
     
   %  if(gscore(cad1)-gscore(cad2) >10)
  
-    tran1=tran(cad1,:);
-    rot1=rot{cad1};
+        tran1=tran(cad1,:);
+        rot1=rot{cad1};
  
 
     transitions(i,:)=transitions(i-1,:)+tran1;
     rotations{i}=rot1;
  
-    tind=ind1(matches(:,1),:);
-    pind=find(goodmark(tind,:)==0);
-    
-    tro=cell(2,1);
-    tro{1}=eye(3);
-    tro{2}=rot1;
-    for j=1:mylength(pind)
-        pts(tind(pind(j)),:)=bestPoint_e([transitions(i-1,:);transitions(i,:)],tro,[ skpt1(pind(j),:);skpt2(pind(j),:)]);
-        ptcolors(tind(pind(j)),:)=  cptcolor(pind(j),:) ; 
-        goodmark(tind(pind(j)))=1;
-    end
-    
-    
 
 end
 
