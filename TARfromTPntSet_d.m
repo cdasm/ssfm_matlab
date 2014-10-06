@@ -15,7 +15,7 @@ for i=1:1000
     
      choice=randperm(num);
      try
-    ee=  calibrated_fivepoint (skpt1(choice(1:5),:),skpt2(choice(1:5),:));
+   [~, ee]=  calibrated_fivepoint_non_gb (skpt1(choice(1:5),:),skpt2(choice(1:5),:));
     if size(ee,2)>0
         for j=1:size(ee,2)
             e=reshape(ee(:,j),[3,3]);
