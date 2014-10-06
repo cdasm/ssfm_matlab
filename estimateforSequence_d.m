@@ -32,7 +32,7 @@ for i=1:nframes
     skptss{i}=zeros(n,3);
     kptcolors{i}=zeros(n,3);
     for j=1:n
-        skptss{i}(j,:)=im2Serph(kpt(j,:),[8000,4000]);
+        skptss{i}(j,:)=im2Serph(kpt(j,:),[512,256]);
         for k=1:3
             %kptcolors{i}(j,k)=img(kpt(j,2),kpt(j,1),k);
         end
@@ -72,7 +72,7 @@ for i=2:nframes
     
     cptcolor=kptcolors{i}(matches(:,2),:);
     
-    [tran,rot,gscore]=TARfromTPntSet_c(skpt1,skpt2);
+    [tran,rot,gscore]=TARfromTPntSet_d(skpt1,skpt2);
     
     [~,idx]=sort(gscore);
     

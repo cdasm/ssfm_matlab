@@ -1,4 +1,12 @@
 function [t,r,g,ind]=TARfromTPntSet_c(skpt1,skpt2) 
+%this is a function for estimate transition and rotation from two point
+%sets using the whole two point sets(this is not good, the 5-point method
+%is superior)
+%t transitions
+%rotations
+%g goodscores
+%ind indexes of good pairs
+
 
 number=mylength(skpt1);
 matr=zeros(number,9);
