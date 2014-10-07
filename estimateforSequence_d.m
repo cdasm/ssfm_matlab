@@ -1,4 +1,9 @@
-function [transitions,rotations,pts,ptcolors]=estimateforSequence_d(seq,goldpts,pntpos)
+function [transitions,rotations,pts,ptcolors]=estimateforSequence_d(seq,goldpts,pntpos,imgsize)
+%please notice the size of the image is written in the program
+
+if nargin<4
+    imgsize=[512,256];
+end
 
 fnms=readLst(seq);
 imgnms=readLst('allimg.lst');
@@ -32,7 +37,7 @@ for i=1:nframes
     skptss{i}=zeros(n,3);
     kptcolors{i}=zeros(n,3);
     for j=1:n
-        skptss{i}(j,:)=im2Serph(kpt(j,:),[512,256]);
+        skptss{i}(j,:)=im2Serph(kpt(j,:),imgsize);
         for k=1:3
             %kptcolors{i}(j,k)=img(kpt(j,2),kpt(j,1),k);
         end
@@ -64,15 +69,22 @@ for i=2:nframes
     
  
     skpt1=skptss{i-1}(matches(:,1),:);
-    
+    ind1=ind1(matches(:,1),:);
+
     skpt1=(rotations{i-1}*skpt1')';
     
     skpt2=skptss{i}(matches(:,2),:);
-    
+    ind2=ind2(matches(:,2),:);
     
     cptcolor=kptcolors{i}(matches(:,2),:);
     
-    [tran,rot,gscore]=TARfromTPntSet_d(skpt1,skpt2);
+    
+    
+    [tran,rot,gscore,gind]=TARfromTPntSet_d(skpt1,skpt2);
+    
+    skpt1=skpt1(gind,:);
+    ind1=ind1(gind,:);
+    skpt2=skpt2(gind,:);
     
     [~,idx]=sort(gscore);
     
@@ -84,16 +96,24 @@ for i=2:nframes
     tran1=tran(cad1,:);
     rot1=rot{cad1};
  
-
+    [t1,t2]=transition_SfromT(tran1);
+    [t3,t4,t5]=rotation_AfromM(rot1);
+    
+    [t6,t7]=bestTaR_b(skpt1,skpt2,[t1,t2,t3,t4,t5]);
+    tran1=t6;
+    rot1=rotateMM(t7);
+    
+    
     transitions(i,:)=transitions(i-1,:)+tran1;
     rotations{i}=rot1;
  
-    tind=ind1(matches(:,1),:);
+    tind=ind1;
     pind=find(goodmark(tind,:)==0);
     
     tro=cell(2,1);
     tro{1}=eye(3);
     tro{2}=rot1;
+    
     for j=1:mylength(pind)
         pts(tind(pind(j)),:)=bestPoint_e([transitions(i-1,:);transitions(i,:)],tro,[ skpt1(pind(j),:);skpt2(pind(j),:)]);
         ptcolors(tind(pind(j)),:)=  cptcolor(pind(j),:) ; 

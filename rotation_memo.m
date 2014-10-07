@@ -1,19 +1,27 @@
 
 syms a b c th real
 
-rz(th) =  [cos(th), -sin(th), 0; sin(th),  cos(th), 0;       0,        0, 1]
+rz(th) =  [cos(th), -sin(th), 0;...
+    sin(th),  cos(th), 0;...
+    0,        0, 1]
 
 
-ry(th) = [  cos(th), 0, sin(th);        0, 1,       0; -sin(th), 0, cos(th)]
+ry(th) = [  cos(th), 0, sin(th);...        
+    0, 1,       0;...
+    -sin(th), 0, cos(th)]
 
 
-rx(th) = [ 1,       0,        0; 0, cos(th), -sin(th); 0, sin(th),  cos(th)]
+rx(th) = [ 1,       0,        0;... 
+    0, cos(th), -sin(th);...
+    0, sin(th),  cos(th)]
 
 %rotate c around z, rotate b around y, and rotate a around x at last
 
 r(a,b,c)= rx(a)*ry(b)*rz(c)
 
-r(a, b, c) = [  cos(b)*cos(c),  -cos(b)*sin(c),  sin(b);  cos(a)*sin(c) + cos(c)*sin(a)*sin(b), cos(a)*cos(c) - sin(a)*sin(b)*sin(c), -cos(b)*sin(a);  sin(a)*sin(c) - cos(a)*cos(c)*sin(b), cos(c)*sin(a) + cos(a)*sin(b)*sin(c),  cos(a)*cos(b)]
+r(a, b, c) = [  cos(b)*cos(c),  -cos(b)*sin(c),  sin(b); ...
+    cos(a)*sin(c) + cos(c)*sin(a)*sin(b), cos(a)*cos(c) - sin(a)*sin(b)*sin(c), -cos(b)*sin(a); ...
+    sin(a)*sin(c) - cos(a)*cos(c)*sin(b), cos(c)*sin(a) + cos(a)*sin(b)*sin(c),  cos(a)*cos(b)]
  
 %from cross product to matrix muplication
 syms a1 a2 a3 real

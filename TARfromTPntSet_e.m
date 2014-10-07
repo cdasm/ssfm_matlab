@@ -1,4 +1,4 @@
-function [t,r,g,gind]=TARfromTPntSet_d(skpt1,skpt2) 
+function [t,r,g,gind]=TARfromTPntSet_e(skpt1,skpt2) 
 
 
 
@@ -44,9 +44,36 @@ errors=abs(diag(skpt1*e*skpt2'));
 [~,ind]=sort(errors);
 
 gind=ind(1:usenum);
-[t,r,g]=TARfromTPntSet_c(skpt1(gind,:),skpt2(gind,:));
 
-%[t,r,g]=TRGoodscoreFromE(e,skpt1(ind(1:usenum),:),skpt2(ind(1:usenumpl),:));
+skpt1=skpt1(gind,:);
+skpt2=skpt2(gind,:);
+
+number=mylength(skpt1);
+matr=zeros(number,9);
+
+for i=1:number 
+    matr(i,:)=reshape(skpt1(i,:)'*skpt2(i,:),[1,9]);
+end
+
+%matr=singular_value_rpca(matr,0.11);
+[~,~,d]=svd(matr);
+
+e=cell(2,1);
+
+for i=1:2
+    e{i}=reshape(d(:,7+i),[3,3]);
+    e{i}=bundle_E(e{i},skpt1,skpt2);
+end
+t=[];
+r=[];
+g=[];
+for i=1:2
+    [tt,tr,tg]=TRGoodscoreFromE(e{i},skpt1,skpt2);
+    t=cat(1,t,tt);
+    r=cat(1,r,tr);
+    g=cat(1,g,tg);
+end
+
 
 
 
