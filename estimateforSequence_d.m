@@ -32,14 +32,14 @@ kptcolors=cell(nframes,1);
 
 for i=1:nframes
     tmp=load(fnms{i});
-    %img=imread(imgnms{i});
+    img=imread(imgnms{i});
     ind=tmp(:,1);    kpt=tmp(:,2:3);      n=mylength(kpt);
     skptss{i}=zeros(n,3);
     kptcolors{i}=zeros(n,3);
     for j=1:n
         skptss{i}(j,:)=im2Serph(kpt(j,:),imgsize);
         for k=1:3
-            %kptcolors{i}(j,k)=img(kpt(j,2),kpt(j,1),k);
+            kptcolors{i}(j,k)=img(kpt(j,2),kpt(j,1),k);
         end
     end
     indss{i}=ind;
@@ -85,6 +85,7 @@ for i=2:nframes
     skpt1=skpt1(gind,:);
     ind1=ind1(gind,:);
     skpt2=skpt2(gind,:);
+    cptcolor=cptcolor(gind,:);
     
     [~,idx]=sort(gscore);
     
@@ -96,12 +97,12 @@ for i=2:nframes
     tran1=tran(cad1,:);
     rot1=rot{cad1};
  
-    [t1,t2]=transition_SfromT(tran1);
-    [t3,t4,t5]=rotation_AfromM(rot1);
+ %   [t1,t2]=transition_SfromT(tran1);
+ %   [t3,t4,t5]=rotation_AfromM(rot1);
     
-    [t6,t7]=bestTaR_b(skpt1,skpt2,[t1,t2,t3,t4,t5]);
-    tran1=t6;
-    rot1=rotateMM(t7);
+ %   [t6,t7]=bestTaR_b(skpt1,skpt2,[t1,t2,t3,t4,t5]);
+ %   tran1=t6;
+ %   rot1=rotateMM(t7);
     
     
     transitions(i,:)=transitions(i-1,:)+tran1;
