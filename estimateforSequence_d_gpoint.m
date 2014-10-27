@@ -97,6 +97,37 @@ for i=2:nframes
     tran1=tran(cad1,:);
     rot1=rot{cad1};
  
+    tpts=zeros(mylength(skpt1),3);
+    tdis=zeros(mylength(skpt1),1);
+     tro=cell(2,1);
+    tro{1}=eye(3);
+    tro{2}=rot1;
+    for j=1:mylength(skpt1)
+        tpts(j,:)=bestPoint_e([transitions(i-1,:);transitions(i-1,:)+tran1],tro,[ skpt1(j,:);skpt2(j,:)]);
+        tdis(j)=norm(tpts(j,:)-transitions(i-1,:)-tran1);
+    end
+    ggind=find(tdis>15 & tdis<100);
+     skpt1=skpt1(ggind,:);
+    ind1=ind1(ggind,:);
+    skpt2=skpt2(ggind,:);
+    cptcolor=cptcolor(ggind,:);
+    
+    [tran,rot,gscore,gind]=TARfromTPntSet_d(skpt1,skpt2);
+    
+    skpt1=skpt1(gind,:);
+    ind1=ind1(gind,:);
+    skpt2=skpt2(gind,:);
+    cptcolor=cptcolor(gind,:);
+    
+    [~,idx]=sort(gscore);
+    
+    cad1=idx(mylength(idx));
+    
+    
+  %  if(gscore(cad1)-gscore(cad2) >10)
+ 
+    tran1=tran(cad1,:);
+    rot1=rot{cad1};
  %   [t1,t2]=transition_SfromT(tran1);
  %   [t3,t4,t5]=rotation_AfromM(rot1);
     
