@@ -125,5 +125,73 @@ end
 
 
 [a1,a2,a3,a4,a5]=solve(f{1}==0,f{2}==0,f{3}==0,f{4}==0,f{5}==0,'x','y','u','v','w')
+%practice for levenburg marquart
 
+syms a b c x y z real
+
+f=((x - a)^2 + (y - b)^2 + (z - c)^2)^(1/2)
+
+jsym=jacobian(f,[x,y,z])
+
+jfunc=matlabFunction(jsym);
+
+
+
+func=matlabFunction(f);
+data_l=[1 1 0; 2 3 4; 5 5 5]
+obs_l=[0,0,0]
+
+Ndata=length(obs_l);
+Nparams=3;
+n_iters=70;
+lamda=0.01;
  
+% step1: ????
+updateJ=1;
+x_est=0;
+y_est=0;
+z_est=0;
+
+dis_init=zeros(1,Ndata);
+for it=1:n_iters
+    if updateJ==1
+       J=zeros(Ndata,Nparams);
+       for i=1:length(obs_l)
+           % for j=1:Nparams
+               J(i,:)=jfunc(data_l(i,1),data_l(i,2),data_l(i,3),x_est,y_est,z_est);
+           % end
+        end
+        for i=1:Ndata;
+            dis_init(i)=func(data_l(i,1),data_l(i,2),data_l(i,3),x_est,y_est,z_est);
+        end
+        d=obs_l-dis_init;
+        H=J'*J;
+        if it==1
+        e=dot(d,d);
+        end
+    end
+    H_lm=H+(lamda*eye(Nparams,Nparams));
+    dp=inv(H_lm)*(J'*d(:));
+    g=J'*d(:);
+    x_lm=x_est+dp(1);
+    y_lm=y_est+dp(2);
+    z_lm=z_est+dp(3);
+    for i=1:3
+         dis_init(i)=func(data_l(i,1),data_l(i,2),data_l(i,3),x_lm,y_lm,z_lm);
+    end
+    d=obs_l-dis_init;
+    e_lm=dot(d,d);
+    if e_lm<e
+        lamda=lamda/10;
+        x_est=x_lm;
+        y_ext=y_lm;
+        y_est=y_lm;
+        z_est=z_lm;
+        e=e_lm;
+        disp(e);
+        updateJ=1;
+    else
+        updateJ=0;
+        lamda=lamda*10;
+    end
+end
