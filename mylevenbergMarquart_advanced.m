@@ -18,9 +18,9 @@ function para_est=mylevenbergMarquart_advanced(data_l,obs_l,func,jfunc,para_init
 
 Ndata=mylength(data_l);
 Nparams=length(para_init);
-Nobserv=length(obj_l)/Ndata;
+Nobserv=length(obs_l)/Ndata;
 
-n_iters=70;
+n_iters=170;
 lamda=0.01;
  
 % step1: ????
