@@ -1,5 +1,10 @@
-function para_est=levenbergMarquart(data_l,obs_l,func,jfunc,para_init)
-
+function para_est=mylevenbergMarquart(data_l,obs_l,func,jfunc,para_init)
+% data_l is the dataset, it is of the form Ndata*dimension
+% obs_l is the objective values, it is of the form 1*Ndata
+% func is a function handler, it is of the form value=func(data,parameters)
+% jfunc is a function handler, it is of the form [differitials over all
+% parameters for one data]=jfunc(data,parameters)
+% para_init is the initial parameter set, it is of the form 1*Nparams
 
 Ndata=length(obs_l);
 Nparams=length(para_init);
@@ -10,6 +15,7 @@ lamda=0.01;
 updateJ=1;
 para_est=para_init;
 dis_init=zeros(1,Ndata);
+
 for it=1:n_iters
     if updateJ==1
        J=zeros(Ndata,Nparams);
@@ -31,7 +37,7 @@ for it=1:n_iters
     end
     H_lm=H+(lamda*eye(Nparams,Nparams));
     %dp=inv(H_lm)*(J'*d(:));
-    dp=(J'*d(:))/H_lm;
+    dp=(d*J)/H_lm;
     %g=J'*d(:);
     %x_lm=x_est+dp(1);
     %y_lm=y_est+dp(2);
