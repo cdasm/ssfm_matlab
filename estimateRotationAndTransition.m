@@ -3,7 +3,7 @@ function [R,t] = estimateRotationAndTransition(projpoints,points)
 syms a b c d e f r1 r2 r3 t1 t2 t3 real; % a b c coordinates of projpoints d e f coordinates of points r1 r2 r3 rotation parameters
 % t1 t2 t3 transition parameters
 
-xtem=(rotation_MfromRodrigues(r1,r2,r3)*([d e f]-[t1 t2 t3])')';
+xtem=(rotation_thompson(r1,r2,r3)*([d e f]-[t1 t2 t3])')';
 
 ff=[xtem(1)/a-xtem(2)/b, xtem(2)/b-xtem(3)/c, xtem(3)/c-xtem(1)/a];
 
@@ -30,7 +30,7 @@ obs_l=zeros(1,3*N);
 
 randt=mylevenbergMarquart_advanced(data_l,obs_l,func,jfunc,[1 1 1 1 1 1]);
 
-R=rotation_MfromRodrigues(randt(1),randt(2),randt(3));
+R=rotation_thompson(randt(1),randt(2),randt(3));
 t=[randt(4),randt(5),randt(6)];
 
 
