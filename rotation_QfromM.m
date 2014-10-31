@@ -1,4 +1,4 @@
-function [q0,q1,q2,q3]=rotationM_QfromM(R)
+function [q0,q1,q2,q3]=rotation_QfromM(R)
 
 %tm=num2cell(p);
 

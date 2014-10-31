@@ -18,3 +18,29 @@
 %ccode(jsym2);
 
 %**********************new version starts here*********************
+
+a=sym('a',[1,3])
+
+b=sym('b',[1,3])
+
+r=sym('r',[1,3])
+
+t=sym('t',[1,3])
+
+xtem=(rotation_MfromRodrigues(r(1),r(2),r(3))*(b-t)')';
+
+ff=[xtem(1)/a(1)-xtem(2)/a(2), xtem(2)/a(2)-xtem(3)/a(3), xtem(3)/a(3)-xtem(1)/a(1)]
+
+ccode(ff)
+
+jsym=jacobian(ff,cat(2,r,t))
+
+ccode(jsym)
+
+jsym2=jacobian(ff,b)
+
+ccode(jsym2)
+
+%**********************memo 2, here transition only have two freedom 
+
+
