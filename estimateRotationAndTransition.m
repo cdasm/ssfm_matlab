@@ -11,13 +11,15 @@ jsym=jacobian(ff,[r1 r2 r3 t1 t2 t3]);
 
 func_=matlabFunction(ff);
 
-N=mylength(projpoints);
+
 
 jfunc_=matlabFunction(jsym);
 
 func=@(x,y)func_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6));
 
 jfunc=@(x,y)jfunc_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6));
+
+N=mylength(projpoints);
 
 data_l=zeros(N,6);
 
