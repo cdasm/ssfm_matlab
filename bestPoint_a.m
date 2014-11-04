@@ -1,4 +1,4 @@
-function pt=bestPoint_a(trans,rots,spts)
+lefunction pt=bestPoint_a(trans,rots,spts)
 
 siz=size(trans);
 n=siz(1);

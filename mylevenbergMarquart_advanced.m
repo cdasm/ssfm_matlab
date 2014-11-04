@@ -30,7 +30,7 @@ dis_init=zeros(1,Ndata*Nobserv);
 
 for it=1:n_iters
     if updateJ==1
-       J=zeros(Ndata,Nparams);
+       J=zeros(Ndata*Nobserv,Nparams);
        for i=1:Ndata
            % for j=1:Nparams
                %J(i,:)=jfunc(data_l(i,1),data_l(i,2),data_l(i,3),x_est,y_est,z_est);
