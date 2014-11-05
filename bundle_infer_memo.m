@@ -29,9 +29,9 @@ t=sym('t',[1,3])
 
 xtem=(rotation_thompson(r(1),r(2),r(3))*(b-t)')';
 
-ff=simple(ff)
-ff=[xtem(1)/a(1)-xtem(2)/a(2), xtem(2)/a(2)-xtem(3)/a(3), xtem(3)/a(3)-xtem(1)/a(1)]
 
+ff=[xtem(1)/a(1)-xtem(2)/a(2), xtem(2)/a(2)-xtem(3)/a(3), xtem(3)/a(3)-xtem(1)/a(1)]
+ff=simple(ff)
 ccode(ff)
 
 jsym=jacobian(ff,cat(2,r,t))
@@ -81,3 +81,32 @@ jsym2=jacobian(ff,b)
 jsym2=simple(jsym2)
 
 ccode(jsym2)
+
+
+
+%###################################the inference actually used goes
+%here###########################
+
+
+syms a b c d e f r1 r2 r3 t1 t2 t3 real; % a b c coordinates of projpoints d e f coordinates of points r1 r2 r3 rotation parameters
+% t1 t2 t3 transition parameters
+
+xtem=(rotation_thompson(r1,r2,r3)*([d e f]-[t1 t2 t3])')';
+
+ff=[xtem(1)/a-xtem(2)/b, xtem(2)/b-xtem(3)/c, xtem(3)/c-xtem(1)/a];
+
+jsym=jacobian(ff,[r1 r2 r3 t1 t2 t3]);
+
+%######################## second inference
+syms a b c d e f r1 r2 r3 t1 t2 real; % a b c coordinates of projpoints d e f coordinates of points r1 r2 r3 rotation parameters
+% t1 t2 t3 transition parameters
+
+xtem=(rotation_thompson(r1,r2,r3)*([d e f]-transition_TfromS(t1,t2))')';
+
+ff=[xtem(1)/a-xtem(2)/b, xtem(2)/b-xtem(3)/c, xtem(3)/c-xtem(1)/a];
+
+jsym=jacobian(ff,[r1 r2 r3 t1 t2]);
+
+
+
+
