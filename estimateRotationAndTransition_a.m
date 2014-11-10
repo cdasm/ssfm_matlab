@@ -5,7 +5,7 @@ syms a b c d e f r1 r2 r3 t1 t2 t3 real; % a b c coordinates of projpoints d e f
 
 xtem=(rotation_thompson(r1,r2,r3)*([d e f]-[t1 t2 t3])')';
 
-ff=[xtem(1)/a-xtem(2)/b, xtem(2)/b-xtem(3)/c, xtem(3)/c-xtem(1)/a]/((d*d+e*e+f*f)^(1/2));
+ff=[xtem(1)/a-xtem(2)/b, xtem(2)/b-xtem(3)/c, xtem(3)/c-xtem(1)/a]/(( [d e f]-[t1 t2 t3] )*( [d e f]-[t1 t2 t3] )')^(1/2) ;
 
 jsym=jacobian(ff,[r1 r2 r3 t1 t2 t3]);
 

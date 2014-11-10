@@ -132,3 +132,60 @@ jfunc2=@(x,y)jfunc_2(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5));
 
 
 
+
+
+
+
+
+
+
+
+
+
+%###################################the inference updated goes
+%here###########################
+
+syms a b c d e f r1 r2 r3 t1 t2 t3 real; % a b c coordinates of projpoints d e f coordinates of points r1 r2 r3 rotation parameters
+% t1 t2 t3 transition parameters
+
+xtem=(rotation_thompson(r1,r2,r3)*([d e f]-[t1 t2 t3])')';
+
+ff=[xtem(1)/a-xtem(2)/b, xtem(2)/b-xtem(3)/c, xtem(3)/c-xtem(1)/a]/sqrt(([d e f]-[t1 t2 t3])*([d e f]-[t1 t2 t3])');
+
+jsym=jacobian(ff,[r1 r2 r3 t1 t2 t3]);
+
+func_=matlabFunction(ff);
+
+jfunc_=matlabFunction(jsym);
+
+xjsym=jacobian(ff,[d,e,f]);
+
+xjfunc_=matlabFunction(xjsym);
+
+func=@(x,y)func_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6));
+
+jfunc=@(x,y)jfunc_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6));
+
+xjfunc=@(x,y)xjfunc_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6))
+
+
+xtem=(rotation_thompson(r1,r2,r3)*([d e f]-transition_TfromS(t1,t2))')';
+
+ff2=[xtem(1)/a-xtem(2)/b, xtem(2)/b-xtem(3)/c, xtem(3)/c-xtem(1)/a]/sqrt(([d e f]-transition_TfromS(t1,t2))*([d e f]-transition_TfromS(t1,t2))');
+
+jsym2=jacobian(ff2,[r1 r2 r3 t1 t2]);
+
+func_2=matlabFunction(ff2);
+
+jfunc_2=matlabFunction(jsym2);
+
+func2=@(x,y)func_2(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5));
+
+jfunc2=@(x,y)jfunc_2(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5));
+
+
+xjsym2=jacobian(ff2,[d,e,f]);
+
+xjfunc_2=matlabFunction(xjsym2);
+
+xjfunc2=@(x,y)xjfunc_2(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5))
