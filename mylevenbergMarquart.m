@@ -11,7 +11,6 @@ Nparams=length(para_init);
 n_iters=70;
 lamda=0.01;
  
-% step1: ????
 updateJ=1;
 para_est=para_init;
 dis_init=zeros(1,Ndata);
