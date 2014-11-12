@@ -10,4 +10,4 @@ else
     system(cm)
 end
 
-edit 'atem.txt'
+%edit 'atem.txt'
