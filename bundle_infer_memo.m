@@ -189,3 +189,87 @@ xjsym2=jacobian(ff2,[d,e,f]);
 xjfunc_2=matlabFunction(xjsym2);
 
 xjfunc2=@(x,y)xjfunc_2(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%########################anotehr round of
+%updates############################# the main idea is directly mease
+%projecting error on each dimension
+
+
+syms a b c d e f r1 r2 r3 t1 t2 t3 real; % a b c coordinates of projpoints d e f coordinates of points r1 r2 r3 rotation parameters
+% t1 t2 t3 transition parameters
+
+
+
+%xtem=(rotation_thompson(r1,r2,r3)*([d e f]-[t1 t2 t3])')';
+
+txtem=([d e f]-[t1 t2 t3]);
+xtem=(rotation_thompson(r1,r2,r3)*((txtem/sqrt(txtem*txtem'))' ))';
+
+ff=[xtem(1)-a, xtem(2)-b, xtem(3)-c];
+
+jsym=jacobian(ff,[r1 r2 r3 t1 t2 t3]);
+
+func_=matlabFunction(ff);
+
+jfunc_=matlabFunction(jsym);
+
+xjsym=jacobian(ff,[d,e,f]);
+
+xjfunc_=matlabFunction(xjsym);
+
+func=@(x,y)func_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6));
+
+jfunc=@(x,y)jfunc_(x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6));
+
+xjfunc=@(x,y)xjfunc_(x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),y(6));
+
+%######################## second inference
+%syms a b c d e f r1 r2 r3 t1 t2 real; % a b c coordinates of projpoints d e f coordinates of points r1 r2 r3 rotation parameters
+% t1 t2 t3 transition parameters
+
+%xtem=(rotation_thompson(r1,r2,r3)*([d e f]-transition_TfromS(t1,t2))')';
+txtem=([d e f]-transition_TfromS(t1,t2));
+xtem=(rotation_thompson(r1,r2,r3)*((txtem/sqrt(txtem*txtem'))' ))';
+
+ff2=[xtem(1)-a, xtem(2)-b, xtem(3)-c];
+
+jsym2=jacobian(ff2,[r1 r2 r3 t1 t2]);
+
+xjsym2=jacobian(ff2,[d e f]);
+
+func_2=matlabFunction(ff2);
+
+jfunc_2=matlabFunction(jsym2);
+
+func2=@(x,y)func_2(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5));
+
+jfunc2=@(x,y)jfunc_2(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5));
+
+
+
+
+
+
+
+
+

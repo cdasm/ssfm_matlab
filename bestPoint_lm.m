@@ -20,5 +20,5 @@ data_l(:,4:6)=u;
 obs_l=zeros(1,mylength(p)*3);
 
 %aa=bestPoint_pu(p,u);
-aa=rand(1,3)*3;
+aa=rand(1,3)*300;
 pnt=mylevenbergMarquart_advanced(data_l,obs_l,func,jfunc,aa);
