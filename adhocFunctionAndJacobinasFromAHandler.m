@@ -42,7 +42,9 @@ eval(str)
 
 outputcpp(ff)
 
+sz=size(ff);
 
+writeAFile(''
 
 end
 
@@ -56,4 +58,25 @@ for i=0:n-1
     lst=[lst, prf,int2str(i),a];
 end
 
+end
+
+
+function writeAFile(fname,varnums,dimlst)
+fp=fopen('btem.txt','w');
+fprintf(fp,'%s\n',fname);
+for i=1:length(varnums)
+    frpintf(fp,'%d ',varnums[i]);
+end
+
+fprintf(fp,'\n');
+
+for i=1:length(dimlst)
+    frpintf(fp,'%d ',dimlst[i]);
+end
+
+fprintf(fp,'\n');
+
+fprintf(fp,'atem.txt');
+
+fclose(fp);
 end
