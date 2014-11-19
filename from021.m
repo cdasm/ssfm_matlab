@@ -22,7 +22,7 @@ c=simplify(c)
 [x,y,z]=solveAlinearfucntion(c)
 
 opnt=[x,y,z]
-opnt=simplify(opnt)
+%opnt=simplify(opnt)
 
 proj1=opnt/sqrt(opnt*opnt');
 
@@ -36,11 +36,15 @@ pe2=proj2-pnt;
 pe=cat(2,pe1,pe2)
 
 jsym=jacobian(pe,[r1,r2,r3,t1,t2]);
+
+
 func_=matlabFunction(pe);
 
 
-
+display('func ok')
 jfunc_=matlabFunction(jsym);
+
+display('jac ok')
 
 func=@(x,y)func_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5));
 
@@ -59,6 +63,6 @@ randt=mylevenbergMarquart_advanced(data_l,obs_l,func,jfunc,[1 1 1 1 1]);
 
 Rr=rotation_thompson(randt(1),randt(2),randt(3));
 %t=[randt(4),randt(5),randt(6)];
-rt= transition_SfromT (randt(4),randt(5));
+rt= transition_TfromS (randt(4),randt(5));
 
 
