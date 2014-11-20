@@ -75,4 +75,7 @@ for it=1:n_iters
         updateJ=0;
         lamda=lamda*10;
     end
+    if e<1e-27
+        break;
+    end
 end
