@@ -1,48 +1,14 @@
 function [Rr,rt] = from021(pnt1,pnt2)
 
-syms p1 p2 p3 q1 q2 q3 t1 t2 r1 r2 r3 real;
+persistent func_;
+persistent jfunc_;
 
-c1=forbestPoint_UnitLengthU([0,0,0],[p1,p2,p3])
-
-rot=rotation_thompson(r1,r2,r3)
-
-pnt=(rot*[q1,q2,q3]')'
-
-t=transition_TfromS(t1,t2)
-
-c2=forbestPoint_UnitLengthU(t,[pnt(1),pnt(2),pnt(3)])
-
-c2=simplify(c2)
-
-c1=simplify(c1)
-
-c=c1+c2
-c=simplify(c)
-
-[x,y,z]=solveAlinearfucntion(c)
-
-opnt=[x,y,z]
-%opnt=simplify(opnt)
-
-proj1=opnt/sqrt(opnt*opnt');
-
-tp2=opnt-t
-proj2=tp2/sqrt(tp2*tp2');
-
-pe1=proj1-[p1,p2,p3];
-
-pe2=proj2-pnt;
-
-pe=cat(2,pe1,pe2)
-
-jsym=jacobian(pe,[r1,r2,r3,t1,t2]);
-
-
-func_=matlabFunction(pe);
-
+if isempty(func_)
+    [func_,jfunc_]=from021Funcs();
+end
 
 display('func ok')
-jfunc_=matlabFunction(jsym);
+
 
 display('jac ok')
 
