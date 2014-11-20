@@ -21,7 +21,7 @@ c=simplify(c)
 [x,y,z]=solveAlinearfucntion(c)
 
 opnt=[x,y,z]
-%opnt=simplify(opnt)
+
 
 proj1=opnt/sqrt(opnt*opnt');
 
@@ -31,6 +31,9 @@ proj2=tp2/sqrt(tp2*tp2');
 pe1=proj1-[p1,p2,p3];
 
 pe2=proj2-pnt;
+
+%pe1=[opnt(1)/p1-opnt(2)/p2,opnt(2)/p2-opnt(3)/p3,opnt(3)/p3-opnt(1)/p1]
+%pe2=[tp2(1)/pnt(1)-tp2(2)/pnt(2),tp2(2)/pnt(2)-tp2(3)/pnt(3),tp2(3)/pnt(3)-tp2(1)/pnt(1)]
 
 pe=cat(2,pe1,pe2)
 

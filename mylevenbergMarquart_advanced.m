@@ -20,7 +20,7 @@ Ndata=mylength(data_l);
 Nparams=length(para_init);
 Nobserv=length(obs_l)/Ndata;
 
-n_iters=170;
+n_iters=1500;
 lamda=0.01;
  
 % step1: ????
