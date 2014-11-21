@@ -5,7 +5,7 @@ ccode(inp,'file','tem.txt')
 if nargin<2
     system('python convertMatalb2Eigen.py tem.txt atem.txt')
 else
-    cm=sprintf('python convertMatalb2Eigen.py tem.txt atem.txt %s',myc)
+    cm=sprintf('python convertMatalb2Eigen.py tem.txt %s',myc)
 
     system(cm)
 end
