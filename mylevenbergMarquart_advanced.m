@@ -20,7 +20,7 @@ Ndata=mylength(data_l);
 Nparams=length(para_init);
 Nobserv=length(obs_l)/Ndata;
 
-n_iters=1500;
+n_iters=500;
 lamda=0.01;
  
 % step1: ????
@@ -49,7 +49,9 @@ for it=1:n_iters
     end
     H_lm=H+(lamda*eye(Nparams,Nparams));
     %dp=inv(H_lm)*(J'*d(:));
-    dp=(d*J)/H_lm;
+    dp=(d*J)*inv(H_lm);
+    %dp=bicgstab(H_lm,(d*J)',1e-15,1000);
+    %dp=dp';
     %g=J'*d(:);
     %x_lm=x_est+dp(1);
     %y_lm=y_est+dp(2);
@@ -62,7 +64,7 @@ for it=1:n_iters
     d=obs_l-dis_init;
     e_lm=dot(d,d);
     if e_lm<e
-        lamda=lamda/10;
+        lamda=lamda/5;
         %x_est=x_lm;
         %y_ext=y_lm;
         %y_est=y_lm;
@@ -73,7 +75,7 @@ for it=1:n_iters
         updateJ=1;
     else
         updateJ=0;
-        lamda=lamda*10;
+        lamda=lamda*5;
     end
     if e<1e-27
         break;
