@@ -1,0 +1,2 @@
+double t0 ;
+t0 = a+b;

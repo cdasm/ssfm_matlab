@@ -1,0 +1,22 @@
+MatrixXd jacobianForPointUnitLength(const MatrixXd& var0,const MatrixXd& var1,const MatrixXd& var2)
+{
+	double b0,b1,b2;
+	b0=var0(0,0);
+	b1=var0(0,1);
+	b2=var0(0,2);
+	double c0,c1,c2;
+	c0=var1(0,0);
+	c1=var1(0,1);
+	c2=var1(0,2);
+	double d0,d1,d2,d3,d4;
+	d0=var2(0,0);
+	d1=var2(0,1);
+	d2=var2(0,2);
+	d3=var2(0,3);
+	d4=var2(0,4);
+	MatrixXd A0(1,3);
+	A0(0,0) = 1.0;
+	A0(0,1) = 1.0;
+	A0(0,2) = 1.0;
+	return A0;
+}
