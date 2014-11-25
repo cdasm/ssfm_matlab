@@ -1,4 +1,4 @@
-function para_est=mylevenbergMarquart_advanced(data_l,obs_l,func,jfunc,para_init)
+function [para_est,e]=mylevenbergMarquart_advanced(data_l,obs_l,func,jfunc,para_init)
 
 % data_l is the dataset, it is of the form Ndata*dimension
 
@@ -20,7 +20,7 @@ Ndata=mylength(data_l);
 Nparams=length(para_init);
 Nobserv=length(obs_l)/Ndata;
 
-n_iters=1500;
+n_iters=550;
 lamda=0.01;
  
 % step1: ????
@@ -36,7 +36,9 @@ for it=1:n_iters
                %J(i,:)=jfunc(data_l(i,1),data_l(i,2),data_l(i,3),x_est,y_est,z_est);
                J((i-1)*Nobserv+1: i*Nobserv,:)=jfunc(data_l(i,:),para_est);
            % end
-        end
+       end
+        %display(J);
+        %waitforbuttonpress;
         for i=1:Ndata
             %dis_init(i)=func(data_l(i,1),data_l(i,2),data_l(i,3),x_est,y_est,z_est);
             dis_init((i-1)*Nobserv+1: i*Nobserv)=func(data_l(i,:),para_est);

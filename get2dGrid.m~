@@ -1,0 +1,15 @@
+function A0=get2dGrid(a,b)
+
+A0=zeros((a)*(b),2);
+
+astart=-pi/2;
+bstart=0;
+
+astep=pi/a;
+bstep=2*pi/b;
+
+for i=1:a
+    for j=1:b
+        A0(i*b,:)=[astart+i*astep,bstart+j*bstep];
+    end
+end

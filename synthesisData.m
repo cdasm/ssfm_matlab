@@ -8,6 +8,6 @@ p=pp-repmat(t,[n,1]);
 
 sp2=p./repmat(sqrt(sum(p.^2,2)),[1,3]);
 
-r=(rand(1,3)-[0.5,0.5,0.5])*pi/10;
+r=(rand(1,3)-[0.5,0.5,0.5])*pi/5;
 
 sp2=(rotateMM(r)'*sp2')';

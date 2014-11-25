@@ -1,0 +1,10 @@
+function r=test5()
+
+grid=get2dGrid(10,20)
+n=mylength(grid)
+
+[pp,sp1,sp2,t,r]=synthesisData(10)
+
+
+
+
