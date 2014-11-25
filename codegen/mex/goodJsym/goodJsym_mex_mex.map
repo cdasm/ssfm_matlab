@@ -1,0 +1,11 @@
+MEX {
+	global:
+		mexFunction;
+		emlrtMexFcnProperties;
+		goodJsym;
+		goodJsym_initialize;
+		goodJsym_terminate;
+		goodJsym_atexit;
+	local:
+		*;
+};

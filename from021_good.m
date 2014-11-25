@@ -3,9 +3,9 @@ function [Rr,rt] = from021_good(pnt1,pnt2)
 persistent func_;
 persistent jfunc_;
 
-if isempty(func_)
-    [func_,jfunc_]=from021Funcs_good();
-end
+%if isempty(func_)
+%    [func_,jfunc_]=from021Funcs_good();
+%end
 
 display('func ok')
 
@@ -13,9 +13,9 @@ display('func ok')
 display('jac ok')
 
 
-func=@(x,y)func_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),20);
+func=@(x,y)goodError_mex(x,y,100);
 
-jfunc=@(x,y)jfunc_(x(1),x(2),x(3),x(4),x(5),x(6),y(1),y(2),y(3),y(4),y(5),20);
+jfunc=@(x,y)goodJsym_mex(x,y,100);
 
 
 func

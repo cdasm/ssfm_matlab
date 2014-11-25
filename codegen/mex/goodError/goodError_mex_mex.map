@@ -1,0 +1,11 @@
+MEX {
+	global:
+		mexFunction;
+		emlrtMexFcnProperties;
+		goodError;
+		goodError_initialize;
+		goodError_terminate;
+		goodError_atexit;
+	local:
+		*;
+};

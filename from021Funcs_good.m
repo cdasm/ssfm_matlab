@@ -1,4 +1,4 @@
-function [func_,jfunc_]=from021Funcs_good()
+%function [func_,jfunc_]=from021Funcs_good()
 syms p1 p2 p3 q1 q2 q3 t1 t2 r1 r2 r3 zz real;
 
 c1=forbestPoint_UnitLengthU([0,0,0],[p1,p2,p3])
@@ -39,7 +39,8 @@ pe=cat(2,pe1*zz,disPntLine_unitlength(opnt,[0,0,0],[p1,p2,p3]),pe2*zz,disPntLine
 
 jsym=jacobian(pe,[r1,r2,r3,t1,t2]);
 
+outputcpp(pe,'pe')
+outputcpp(jsym,'jsym')
+%func_=matlabFunction(pe);
 
-func_=matlabFunction(pe);
-
-jfunc_=matlabFunction(jsym);
+%jfunc_=matlabFunction(jsym);

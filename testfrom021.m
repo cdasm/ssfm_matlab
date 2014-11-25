@@ -1,9 +1,9 @@
 function r= testfrom021(n)
 
 n=0;
-for i=1:100
-    [pp,sp1,sp2,t,r]=synthesisData(50);
-[mr,mt]=from021fast(sp1,sp2);
+for i=1:20
+    [pp,sp1,sp2,t,r]=synthesisData(500);
+[mr,mt]=from021_good(sp1,sp2);
 a=t./mt;
 
 a=a./sqrt(a*a');
