@@ -14,7 +14,7 @@ n=nargin(fhandle);
 
 assert(n==total);
 
-funcLst={'functionForRotationAndTransition','jacobianForRotationAndTransition','jacobianForPoint'};
+funcLst={'projectionError','jacobianForCamera','jacobianForPoint'};
 
 jacIndLst=[3,2];
 
@@ -32,7 +32,7 @@ ghandle=matlabFunction(tf)
 
 nlst2=[3,3,5];
 
-funcLst2={'functionForRotationAndTransitionUnitLength','jacobianForRotationAndTransitionUnitLength','jacobianForPointUnitLength'};
+funcLst2={'projectionErrorUnitLength','jacobianForCameraUnitLength','jacobianForPointUnitLength'};
 
 jacIndlst2=[3,2];
 
