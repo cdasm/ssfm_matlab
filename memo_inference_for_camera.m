@@ -1,0 +1,1 @@
+%inference for camera pose
